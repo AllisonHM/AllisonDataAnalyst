@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Allison Haut</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      color: white;
+      background-color: #000;
+    }
+
+    #vanta-bg {
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .btn {
+      background-color: rgba(0, 255, 0, 0.2);
+      border: 1px solid #00ff88;
+      color: #00ff88;
+      padding: 12px 25px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      transition: all 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #00ff88;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div id="vanta-bg">
+    <div class="content">
+      <h1>Allison Haut</h1>
+      <div class="buttons">
+        <a href="https://wa.me/5547999471874" target="_blank" class="btn">WhatsApp</a>
+        <a href="mailto:allisonhaut@gmail.com" class="btn">Email</a>
+        <a href="https://www.linkedin.com/in/allisonhaut" target="_blank" class="btn">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- VANTA.NET scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+  <script>
+    VANTA.NET({
+      el: "#vanta-bg",
+      color: 0x00ff88,
+      backgroundColor: 0x000000,
+      points: 12.0,
+      maxDistance: 20.0,
+      spacing: 15.0
+    });
+  </script>
+</body>
+</html>
