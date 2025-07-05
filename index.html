@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Allison Haut</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body, html {
       margin: 0;
@@ -62,6 +63,11 @@
     .lang-toggle {
       margin-top: 40px;
     }
+
+    .chart-container {
+      max-width: 600px;
+      margin: 40px auto 0;
+    }
   </style>
 </head>
 <body>
@@ -73,6 +79,9 @@
         <a href="mailto:allisonhaut@gmail.com" class="btn">E-mail</a>
         <a href="https://www.linkedin.com/in/allison-haut-8aa835213/" target="_blank" class="btn">LinkedIn</a>
         <a href="en.html" class="btn lang-toggle">🇺🇸 English</a>
+      </div>
+      <div class="chart-container">
+        <canvas id="graficoVendas"></canvas>
       </div>
     </div>
   </div>
@@ -87,6 +96,39 @@
       points: 12.0,
       maxDistance: 20.0,
       spacing: 15.0
+    });
+
+    const ctx = document.getElementById('graficoVendas').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago'],
+        datasets: [{
+          label: 'Vendas (R$)',
+          data: [120076, 98570, 130231, 112465, 103608, 87054, 156690, 145032],
+          backgroundColor: 'rgba(0, 255, 136, 0.4)',
+          borderColor: '#00ff88',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: '#00ff88'
+            }
+          }
+        },
+        scales: {
+          x: {
+            ticks: { color: '#fff' }
+          },
+          y: {
+            ticks: { color: '#fff' }
+          }
+        }
+      }
     });
   </script>
 </body>
