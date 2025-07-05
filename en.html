@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Allison Haut</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body, html {
       margin: 0;
@@ -27,11 +28,16 @@
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 30px;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
     }
 
     .buttons {
@@ -40,7 +46,6 @@
       gap: 15px;
       align-items: center;
       width: 250px;
-      margin: 0 auto;
     }
 
     .btn {
@@ -59,24 +64,50 @@
       color: #000;
     }
 
+    .charts {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
     .lang-toggle {
-      margin-top: 40px;
+      margin-top: 30px;
+    }
+
+    canvas {
+      background-color: #111;
+      border-radius: 10px;
+      padding: 10px;
     }
   </style>
 </head>
 <body>
   <div id="vanta-bg">
     <div class="content">
-      <h1>Allison Haut</h1>
+      <!-- Sales bar chart -->
+      <div class="charts">
+        <h1 style="text-align: center;">Sales</h1>
+        <canvas id="graficoVendas" width="300" height="250"></canvas>
+      </div>
+
+      <!-- Contact buttons -->
       <div class="buttons">
+        <h1>Allison Haut</h1>
         <a href="https://wa.me/5547999471874" target="_blank" class="btn">WhatsApp</a>
         <a href="mailto:allisonhaut@gmail.com" class="btn">Email</a>
         <a href="https://www.linkedin.com/in/allison-haut-8aa835213/" target="_blank" class="btn">LinkedIn</a>
-        <a href="index.html" class="btn lang-toggle">🇧🇷 Português</a>
+        <a href="index.html" class="btn lang-toggle">🇧🇷 Portuguese</a>
+      </div>
+
+      <!-- Expense pie chart -->
+      <div class="charts">
+        <h1 style="text-align: center;">Expenses</h1>
+        <canvas id="graficoPizza" width="300" height="250"></canvas>
       </div>
     </div>
   </div>
 
+  <!-- Vanta background -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
   <script>
@@ -87,6 +118,62 @@
       points: 12.0,
       maxDistance: 20.0,
       spacing: 15.0
+    });
+
+    // Bar chart - Sales
+    const ctxBar = document.getElementById('graficoVendas').getContext('2d');
+    new Chart(ctxBar, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+        datasets: [{
+          label: 'Sales (R$)',
+          data: [120076, 98570, 130231, 112465, 103608, 87054, 156690, 145032],
+          backgroundColor: 'rgba(0, 255, 136, 0.4)',
+          borderColor: '#00ff88',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            labels: { color: '#00ff88' }
+          }
+        },
+        scales: {
+          x: { ticks: { color: '#fff' } },
+          y: { ticks: { color: '#fff' } }
+        }
+      }
+    });
+
+    // Pie chart - Expenses
+    const ctxPie = document.getElementById('graficoPizza').getContext('2d');
+    new Chart(ctxPie, {
+      type: 'pie',
+      data: {
+        labels: ['People Management', 'Raw Material', 'Processes'],
+        datasets: [{
+          label: 'Expenses (R$)',
+          data: [45000, 31010, 29000],
+          backgroundColor: [
+            'rgba(0, 255, 136, 0.6)',
+            'rgba(0, 255, 255, 0.6)',
+            'rgba(255, 255, 0, 0.6)'
+          ],
+          borderColor: '#000',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: false,
+        plugins: {
+          legend: {
+            labels: { color: '#fff' }
+          }
+        }
+      }
     });
   </script>
 </body>
