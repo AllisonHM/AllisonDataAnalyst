@@ -15,6 +15,7 @@
       background-color: #000;
     }
 
+    /* Container para o fundo interativo */
     #vanta-bg {
       width: 100%;
       height: 100vh;
@@ -22,58 +23,49 @@
       overflow: hidden;
     }
 
+    /* Container principal centralizado em duas colunas */
     .content {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      text-align: center;
       display: flex;
       flex-direction: row;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-start;
       gap: 40px;
+      padding: 20px;
     }
 
-    h1 {
-      font-size: 2.5rem;
+    /* Área da esquerda com as informações */
+    .info {
+      max-width: 400px;
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+    .info p {
       margin-bottom: 20px;
     }
 
-    .buttons {
+    /* Container dos gráficos, dispostos lado a lado */
+    .charts-container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    /* Cada caixa de gráfico, com título e canvas */
+    .chart-box {
       display: flex;
       flex-direction: column;
-      gap: 15px;
       align-items: center;
-      width: 250px;
+    }
+    .chart-box h1 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+      text-align: center;
     }
 
-    .btn {
-      background-color: rgba(0, 255, 0, 0.2);
-      border: 1px solid #00ff88;
-      color: #00ff88;
-      padding: 12px 25px;
-      text-decoration: none;
-      font-size: 1.2rem;
-      border-radius: 8px;
-      transition: all 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #00ff88;
-      color: #000;
-    }
-
-    .charts {
-      display: flex;
-      flex-direction: column;
-      gap: 25px;
-    }
-
-    .lang-toggle {
-      margin-top: 30px;
-    }
-
+    /* Estilização dos canvas */
     canvas {
       background-color: #111;
       border-radius: 10px;
@@ -84,30 +76,31 @@
 <body>
   <div id="vanta-bg">
     <div class="content">
-      <!-- Gráfico de barras -->
-      <div class="charts">
-        <h1 style="text-align: center;">Vendas</h1>
-        <canvas id="graficoVendas" width="300" height="250"></canvas>
+      <!-- Área Esquerda: Informações -->
+      <div class="info">
+        <p>Desenvolvo a Dashboard/Gráfico ideal para seu negócio.</p>
+        <p>Crio a planilha que você precisa.</p>
+        <p>Calculo suas previsões de vendas/demanda do ano inteiro, e projeções de crescimento do seu negócio.</p>
+        <p>Coloco na sua operação um "Agente", que irá adiantar o atendimento do seu negócio.</p>
       </div>
 
-      <!-- Botões -->
-      <div class="buttons">
-        <h1>Allison Haut</h1>
-        <a href="https://wa.me/5547999471874" target="_blank" class="btn">WhatsApp</a>
-        <a href="mailto:allisonhaut@gmail.com" class="btn">E-mail</a>
-        <a href="https://www.linkedin.com/in/allison-haut-8aa835213/" target="_blank" class="btn">LinkedIn</a>
-        <a href="en.html" class="btn lang-toggle">🇺🇸 English</a>
-      </div>
-
-      <!-- Gráfico de pizza -->
-      <div class="charts">
-        <h1 style="text-align: center;">Despesas</h1>
-        <canvas id="graficoPizza" width="300" height="250"></canvas>
+      <!-- Área Direita: Gráficos lado a lado -->
+      <div class="charts-container">
+        <!-- Gráfico de Barras: Vendas -->
+        <div class="chart-box">
+          <h1>Vendas</h1>
+          <canvas id="graficoVendas" width="300" height="250"></canvas>
+        </div>
+        <!-- Gráfico de Pizza: Despesas -->
+        <div class="chart-box">
+          <h1>Despesas</h1>
+          <canvas id="graficoPizza" width="300" height="250"></canvas>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Vanta Background -->
+  <!-- Scripts para o fundo interativo Vanta -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
   <script>
@@ -119,8 +112,11 @@
       maxDistance: 20.0,
       spacing: 15.0
     });
+  </script>
 
-    // Gráfico de barras - Vendas
+  <!-- Scripts para os gráficos com Chart.js -->
+  <script>
+    // Gráfico de Barras - Vendas
     const ctxBar = document.getElementById('graficoVendas').getContext('2d');
     new Chart(ctxBar, {
       type: 'bar',
@@ -148,7 +144,7 @@
       }
     });
 
-    // Gráfico de pizza - Despesas
+    // Gráfico de Pizza - Despesas
     const ctxPie = document.getElementById('graficoPizza').getContext('2d');
     new Chart(ctxPie, {
       type: 'pie',
